@@ -50,6 +50,8 @@ $routes->get('logout', 'SigninController::logout');
 $routes->get('feedbackform/(:any)', 'feedbackController::userfeedbackform/$1');
 $routes->get('addqfeedback', 'feedbackController::addquestionstofeedbackform');
 $routes->post('submitquestion', 'feedbackController::qstore');
+$routes->get('showfeedbackform/(:any)', 'feedbackController::showquestionstofeedbackform/$1');
+$routes->post('savefeedback', 'feedbackController::saveuserfeedback');
 
 /*
  * --------------------------------------------------------------------

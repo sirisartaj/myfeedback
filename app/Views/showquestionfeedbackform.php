@@ -22,31 +22,20 @@
                    <?= $validation->listErrors() ?>
                 </div>
                 <?php endif;?>
-                <form action="<?php echo base_url(); ?>/submitquestion" method="post" onsubmit="return valid();">
-                    <?php foreach($qu as $qusestion){ ?>
+                <form action="<?php echo base_url(); ?>/savefeedback" method="post" onsubmit="return valid();">
+                    <?php $i=1; foreach($qu as $qusestion){ ?>
                     <div class="form-group mb-3">
-                    	<label>Question</label>
-                        <input type="text"  id="question" name="question" placeholder="question" value="<?= set_value('question') ?>" class="form-control" >
-                        <span id="error_question" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                    	<label>Option 1</label>
-                        <input type="text" name="option1"  id="option1" placeholder="option1" class="form-control" value="<?= set_value('option1') ?>">
-                        <span id="option1" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                    	<label>Option 2</label>
-                        <input type="text" name="option2"  id="option2" placeholder="option2" class="form-control" value="<?= set_value('option2') ?>">
-                        <span id="error_option2" class="text-danger"></span>
-                    </div>
-                    <div class="form-group mb-3">
-                    	<label>Option 3</label>
-                        <input type="text" name="option3" id="option3" placeholder="option3" class="form-control" value="<?= set_value('option3') ?>" >
-                        <span id="error_option3" class="text-danger"></span>
+                    	
+                        <input type="hidden"  id="fid" name="fid" placeholder="fid" value="<?php echo $qusestion['fid'] ?>" class="form-control" >
+                        <input type="hidden"  id="fid" name="uid" placeholder="uid" value="<?php echo $qusestion['fid'] ?>" class="form-control" >
+                        <h3 ><label><?php echo $i++;?>, </label><?php echo $qusestion['question'] ?></h3>
+                        <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option1"><?php echo $qusestion['option1'] ?></h4>
+                        <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option2"><?php echo $qusestion['option2'] ?></h4>
+                        <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option3"><?php echo $qusestion['option3'] ?></h4>
                     </div>
                     <?php  } ?>
                     <div class="d-grid">
-                         <button type="submit" class="btn btn-success">Add</button>
+                         <button type="submit" class="btn btn-success">Save</button>
                     </div>     
                 </form>
             </div>

@@ -46,6 +46,32 @@ class FeedbackController extends Controller
             //print_r($this->validator->listErrors());exit;
             echo view('addquestionfeedbackform', $data);
         }
+    } 
+    public function saveuserfeedback(){
+        helper(['form']);
+       /* $rules = [
+            'question'=> 'required|min_length[2]|max_length[550]|is_unique[feedback_form_questions.question]',
+            'option1' => 'required|min_length[1]|max_length[100]',
+            'option2' => 'required|min_length[1]|max_length[100]',
+            'option3' => 'required|min_length[1]|max_length[100]'            
+        ];
+
+        if($this->validate($rules)){*/
+            $feedbackModel = new feedbackModel();
+            $data = [
+                'user_id'     => $this->request->getVar('user_id'),
+                'fid'    => $this->request->getVar('fid'),
+                'ansoption' => $this->request->getVar('ansoption'),
+                'status' => $this->request->getVar('status'),
+                'created_at' => $this->request->getVar('created_at'),
+            ];
+            $feedbackModel->save($data);
+            echo view('successfeedback');
+        /*}else{
+            $data['validation'] = $this->validator;
+            //print_r($this->validator->listErrors());exit;
+            echo view('addquestionfeedbackform', $data);
+        }*/
     }
 
     public function showquestionstofeedbackform($userid="")

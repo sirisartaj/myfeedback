@@ -14,9 +14,9 @@ class feedbackModel extends Model{
     ];
 
 
-    public function fetchallquestions($uid='')
+    public function fetchalluserfeedback()
     {     
-        return $this->where('user_id',$uid)->orderBy('fid','DESC')->findAll();
+        return $this->orderBy('fid','DESC')->findAll();
     } 
 
 }

@@ -2,6 +2,7 @@
 namespace App\Controllers;  
 use CodeIgniter\Controller;
 use App\Models\Feedback_form_questionsModel;
+use App\Models\feedbackModel;
   
 class FeedbackController extends Controller
 {
@@ -58,6 +59,7 @@ class FeedbackController extends Controller
 
         if($this->validate($rules)){*/
             $feedbackModel = new feedbackModel();
+            echo "<pre>";print_r($this->request->getVar());
             $data = [
                 'user_id'     => $this->request->getVar('user_id'),
                 'fid'    => $this->request->getVar('fid'),
@@ -65,7 +67,9 @@ class FeedbackController extends Controller
                 'status' => $this->request->getVar('status'),
                 'created_at' => $this->request->getVar('created_at'),
             ];
+            print_r($data);
             $feedbackModel->save($data);
+            exit;
             echo view('successfeedback');
         /*}else{
             $data['validation'] = $this->validator;
@@ -81,6 +85,14 @@ class FeedbackController extends Controller
         $data['session'] = $session;
         $Feedback_form_questionsModel = new Feedback_form_questionsModel();
         $data['qu'] = $Feedback_form_questionsModel->fetchallquestions();
+        $data['user_id'] = $user_id;
         echo view('showquestionfeedbackform',$data);
+    }
+
+    public function feedbackreport(){
+        $feedbackModel = new feedbackModel();
+        $data['feedbackdata'] = $feedbackModel->fetchalluserfeedback();
+
+        echo view('feedback_report',$data);
     }
 }

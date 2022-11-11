@@ -26,8 +26,8 @@
                     <?php $i=1; foreach($qu as $qusestion){ ?>
                     <div class="form-group mb-3">
                     	
-                        <input type="hidden"  id="fid" name="fid" placeholder="fid" value="<?php echo $qusestion['fid'] ?>" class="form-control" >
-                        <input type="hidden"  id="fid" name="uid" placeholder="uid" value="<?php echo $qusestion['fid'] ?>" class="form-control" >
+                        <input type="hidden"  id="fid" name="fid[]" placeholder="fid" value="<?php echo $qusestion['fid'] ?>" class="form-control" >
+                        <input type="hidden"  id="user_id" name="user_id" placeholder="uid" value="<?php echo $user_id; ?>" class="form-control" >
                         <h3 ><label><?php echo $i++;?>, </label><?php echo $qusestion['question'] ?></h3>
                         <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option1"><?php echo $qusestion['option1'] ?></h4>
                         <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option2"><?php echo $qusestion['option2'] ?></h4>
@@ -45,7 +45,7 @@
 
 <script>
 	function valid(){
-		var error =0;
+		/*var error =0;
 		if($('#question').val()==''){
 			$('#error_question').html('please enter question');
 			error = 1;
@@ -68,7 +68,8 @@
 
 		if(error ==1){
 			return false;
-		}
+		}*/
+		return true;
 
 	}
 

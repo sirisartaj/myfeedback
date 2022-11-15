@@ -27,7 +27,7 @@ class BannersRepository
   public function getBanners(): array
   {      
     try {
-      $sql = "SELECT banner_id AS bannerId, banner_title AS bannerTitle, CONCAT('".UPLOADURL."banners/', `banner_image`) AS bannerImage, target_url AS targetUrl, status, created_date AS createdDate, updated_date AS updatedDate, created_by AS createdBy, modified_by AS modifiedBy FROM  ".DBPREFIX."_bannerdetails";
+      $sql = "SELECT banner_id AS bannerId, banner_title AS bannerTitle, CONCAT('".UPLOADURL."banners/', `banner_image`) AS bannerImage, target_url AS targetUrl, status, created_date AS createdDate, updated_date AS updatedDate, created_by AS createdBy, modified_by AS modifiedBy FROM  sg_bannerdetails";
       $stmt = $this->connection->prepare($sql);  
       $stmt->execute();
       $banners = $stmt->fetchAll(PDO::FETCH_OBJ);
@@ -104,6 +104,7 @@ class BannersRepository
   }
   public function addBanner($data) {
     try {
+      
       extract($data);
       $sql = "INSERT INTO ".DBPREFIX."_bannerdetails SET banner_title=:banner_title, banner_image=:banner_image , target_url = :target_url, status = :status , created_date = :created_date, created_by = :created_by";
       $stmt = $this->connection->prepare($sql);  

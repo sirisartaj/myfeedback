@@ -17,7 +17,7 @@ define('UPLOADPATH', $_SERVER['DOCUMENT_ROOT'] .'/slim4/public/uploads/');
 define("SITEURL", "http://" . $_SERVER['HTTP_HOST'] . '/slim4/public/');
 define('UPLOADURL', SITEURL.'public/uploads/');
 define('CONTROLLERPATH', 'Controllers/');
-define("DBPREFIX", "");
+define("DBPREFIX", "sg");
 
 //Error codes
 define('ERR_OK', 200);//ok

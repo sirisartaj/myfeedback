@@ -27,7 +27,7 @@ class App extends BaseConfig
     public $baseURL = 'http://localhost/myfeedback/public';
     public $baseURL1 = 'http://localhost/myfeedback/public';
     public $RESTURL = 'http://localhost/myfeedback/slim4';
-
+    
     /**
      * --------------------------------------------------------------------------
      * Index File

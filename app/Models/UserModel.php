@@ -1,6 +1,7 @@
 <?php 
 namespace App\Models;  
 use CodeIgniter\Model;
+use App\Controllers\Home;
   
 class UserModel extends Model{
     protected $table = 'users';
@@ -13,8 +14,13 @@ class UserModel extends Model{
     ];
 
     public function home(){
-        echo RESTURL;exit;
-        $url = RESTURL.'banners/getbanner';
+        //echo RESTURL;exit;
+        $home = new home();
+        $data = array('banner_title'=>"first banner");
+        $url = baseURL1.'/banners/addbanner';//exit;
+
+        $home->CallAPI('POST',$url,$data);
+       print_r($controllerData);exit;
         //$this->CallAPI('POST','banners/getbanner',$data);
     }
 }

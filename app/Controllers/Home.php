@@ -1,16 +1,15 @@
 <?php
 
 namespace App\Controllers;
-
+use App\Models\UserModel;
 class Home extends BaseController
 {
     public function index()
     {
         helper('url');
-        $data = array('bannerId'=>'1');
-        $url = baseURL1.'/banners/getbanners';//exit;
-       $a = $this->CallAPI('get',$url,$data);
-       print_r($a);exit;
-        return view('welcome_message');
+        $userModel = new UserModel();
+       $result =  $userModel->home();
+        
+        //return view('welcome_message');
     }
 }

@@ -52,6 +52,10 @@ abstract class BaseController extends Controller
 
     public function CallAPI($method, $url, $data = false){
        try{
+        echo $url;
+        print_r($data);
+        //echo $method;//exit;
+        define('RESTAPYKEY',urldecode('78e7fc94-0169-4b9a-994d-5e402cfbb01'));
       $curl = curl_init();
       switch ($method){
         case "POST":
@@ -77,7 +81,10 @@ abstract class BaseController extends Controller
         default:
           if ($data) {
             $data = json_encode($data);
-            $url = sprintf("%s?%s", $url, http_build_query($data));
+            echo $data;
+           //echo  $data = http_build_query($data,'');
+           exit;
+            $url = sprintf("%s?%s", $url, $data);
           }                    
       }        
       curl_setopt($curl, CURLOPT_URL, $url);

@@ -58,19 +58,25 @@ class FeedbackController extends Controller
         ];
 
         if($this->validate($rules)){*/
-            $feedbackModel = new feedbackModel();
-            echo "<pre>";print_r($this->request->getVar());
-            $data = [
-                'user_id'     => $this->request->getVar('user_id'),
-                'fid'    => $this->request->getVar('fid'),
-                'ansoption' => $this->request->getVar('ansoption'),
-                'status' => $this->request->getVar('status'),
-                'created_at' => $this->request->getVar('created_at'),
-            ];
-            print_r($data);
-            $feedbackModel->save($data);
-            exit;
-            echo view('successfeedback');
+            $feedbackModel = new feedbackModel();           
+            foreach($this->request->getVar('fid') as $fid){
+              // $fidans[$fid] = $this->request->getVar('ansoption_'.$fid)[0];
+               $data = [
+                    'user_id'     => $this->request->getVar('user_id'),
+                    'fid'    => $fid,
+                    'ansoption' => $this->request->getVar('ansoption_'.$fid)[0],
+                    'status' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                ];
+               
+                $a = $feedbackModel->insert($data);
+                //echo $feedbackModel->getLastQuery();
+            }
+
+            if($a){
+                echo view('successfeedback');
+            }
+            
         /*}else{
             $data['validation'] = $this->validator;
             //print_r($this->validator->listErrors());exit;

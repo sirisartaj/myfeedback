@@ -11,4 +11,10 @@ class UserModel extends Model{
         'password',
         'created_at'
     ];
+
+    public function home(){
+        echo RESTURL;exit;
+        $url = RESTURL.'banners/getbanner';
+        //$this->CallAPI('POST','banners/getbanner',$data);
+    }
 }

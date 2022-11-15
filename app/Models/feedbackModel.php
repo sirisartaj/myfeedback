@@ -4,7 +4,12 @@ use CodeIgniter\Model;
   
 class feedbackModel extends Model{
     protected $table = 'feedback';
-    
+    protected $primaryKey = 'id ';
+
+    protected $useAutoIncrement = true;
+
+    protected $returnType     = 'array';
+    protected $useSoftDeletes = true;
     protected $allowedFields = [
         'user_id',
         'fid',

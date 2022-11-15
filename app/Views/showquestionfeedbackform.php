@@ -22,12 +22,17 @@
                    <?= $validation->listErrors() ?>
                 </div>
                 <?php endif;?>
+                <?php 
+//print_r($session);
+//echo $session->get('name');
+$user_id = $session->get('id');
+                ?>
                 <form action="<?php echo base_url(); ?>/savefeedback" method="post" onsubmit="return valid();">
                     <?php $i=1; foreach($qu as $qusestion){ ?>
                     <div class="form-group mb-3">
                     	
                         <input type="hidden"  id="fid" name="fid[]" placeholder="fid" value="<?php echo $qusestion['fid'] ?>" class="form-control" >
-                        <input type="hidden"  id="user_id" name="user_id" placeholder="uid" value="<?php echo $user_id; ?>" class="form-control" >
+                        <input type="hidden"  id="user_id" name="user_id"  value="<?php echo $user_id; ?>" class="form-control" >
                         <h3 ><label><?php echo $i++;?>, </label><?php echo $qusestion['question'] ?></h3>
                         <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option1"><?php echo $qusestion['option1'] ?></h4>
                         <h4> <input type="radio" name="ansoption_<?php echo $qusestion['fid'] ?>[]" value="option2"><?php echo $qusestion['option2'] ?></h4>

@@ -8,7 +8,7 @@ class SigninController extends Controller
     public function index()
     {
         helper(['form']);
-        echo view('signin');
+        echo view('signin_view');
     } 
   
     public function loginAuth()
@@ -44,7 +44,10 @@ class SigninController extends Controller
         }
     }
 
-     public function logout()
+    public function logincheck(){
+        return redirect()->to('/adduser');
+    }
+     public function logout()    
     {
         $session = session();
         $session->destroy();

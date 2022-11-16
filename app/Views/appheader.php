@@ -130,7 +130,8 @@
 															class="avatar  profile-user brround cover-image">
 													</span>
 													<div class="text-center p-1 d-flex d-lg-none-max">
-														<h6 class="mb-0 ms-1" id="profile-heading"><?php echo $session->get('name');?><i class="user-angle ms-1 fa fa-angle-down "></i></h6>
+														<h6 class="mb-0 ms-1" id="profile-heading"><?php //echo $session->get('name');?>
+														<i class="user-angle ms-1 fa fa-angle-down "></i></h6>
 													</div>
 												</a>
 												<div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">

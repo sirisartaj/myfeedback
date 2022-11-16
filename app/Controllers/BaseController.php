@@ -52,18 +52,19 @@ abstract class BaseController extends Controller
 
     public function CallAPI($method, $url, $data = false){
        try{
-        echo $url;
-        print_r($data);
+       // echo $url;
+        //print_r($data);
         //echo $method;//exit;
         define('RESTAPYKEY',urldecode('78e7fc94-0169-4b9a-994d-5e402cfbb01'));
       $curl = curl_init();
       switch ($method){
         case "POST":
+
           curl_setopt($curl, CURLOPT_POST, true);
           if ($data) {
             $data['user_id'] = "1"; 
             $data['apiKey'] = RESTAPYKEY;                    
-            $data = json_encode($data);
+           // $data = json_encode($data);
               curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
           }                    
           break;
@@ -81,18 +82,19 @@ abstract class BaseController extends Controller
         default:
           if ($data) {
             $data = json_encode($data);
-            echo $data;
+           // echo $data;
            //echo  $data = http_build_query($data,'');
-           exit;
+           //exit;
             $url = sprintf("%s?%s", $url, $data);
-          }                    
+          }  
+          break;                  
       }        
       curl_setopt($curl, CURLOPT_URL, $url);
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
       $result = curl_exec($curl);
          
       curl_close($curl);
-      //print_r($result);exit();
+      print_r($result);exit();
       $decoded = json_decode($result);
       // echo 'res--';print_r(trim($decoded));exit();
       if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {

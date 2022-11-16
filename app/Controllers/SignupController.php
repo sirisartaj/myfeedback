@@ -9,11 +9,13 @@ class SignupController extends Controller
     {
         helper(['form']);
         $data = [];
+
         echo view('signup', $data);
     }
   
     public function store()
     {
+
         helper(['form']);
         $rules = [
             'name'          => 'required|min_length[2]|max_length[50]',
@@ -29,7 +31,8 @@ class SignupController extends Controller
                 'email'    => $this->request->getVar('email'),
                 'password' => password_hash($this->request->getVar('password'), PASSWORD_DEFAULT)
             ];
-            $userModel->save($data);
+
+            $userModel->adduser($data);
             return redirect()->to('/signin');
         }else{
             $data['validation'] = $this->validator;

@@ -42,13 +42,13 @@ final class Users
   {
     try {
       extract($data);
-      if(isset($UserImage)&&!empty($UserImage)){
+      if(isset($user_avatar)&&!empty($user_avatar)){
         $filedir = UPLOADPATH."Users/"; 
         $randName = rand(10101010, 9090909090);
         $newName = "User_". $randName;
-        $ext = substr($UserImage['name'], strrpos($UserImage['name'], '.') + 1);
+        $ext = substr($user_avatar['name'], strrpos($user_avatar['name'], '.') + 1);
         $ImageUpload = new ImageUpload;
-        $ImageUpload->File = $UserImage;
+        $ImageUpload->File = $user_avatar;
         $ImageUpload->method = 1;
         $ImageUpload->SavePath = $filedir;
         $ImageUpload->NewWidth = '100';
@@ -56,9 +56,9 @@ final class Users
         $ImageUpload->NewName = $newName;
         $ImageUpload->OverWrite = true;
         $err = $ImageUpload->UploadFile();
-        $UserImage = $newName.".".strtolower($ext);
+        $user_avatar = $newName.".".strtolower($ext);
       }
-      $data['UserImage'] = $UserImage;
+      $data['user_avatar'] = $user_avatar;
       $res = $this->repository->addUser($data);
       return $res;
     } catch(PDOException $e) {
@@ -73,13 +73,13 @@ final class Users
   {
     try {
       extract($data);
-      if(isset($UserImage)&&!empty($UserImage)){
+      if(isset($user_avatar)&&!empty($user_avatar)){
         $filedir = UPLOADPATH."Users/"; 
         $randName = rand(10101010, 9090909090);
         $newName = "User_". $randName;
-        $ext = substr($UserImage['name'], strrpos($UserImage['name'], '.') + 1);
+        $ext = substr($user_avatar['name'], strrpos($user_avatar['name'], '.') + 1);
         $ImageUpload = new ImageUpload;
-        $ImageUpload->File = $UserImage;
+        $ImageUpload->File = $user_avatar;
         $ImageUpload->method = 1;
         $ImageUpload->SavePath = $filedir;
         $ImageUpload->NewWidth = '100';
@@ -87,9 +87,9 @@ final class Users
         $ImageUpload->NewName = $newName;
         $ImageUpload->OverWrite = true;
         $err = $ImageUpload->UploadFile();
-        $UserImage = $newName.".".strtolower($ext);
+        $user_avatar = $newName.".".strtolower($ext);
       }
-      $data['UserImage'] = $UserImage;
+      $data['user_avatar'] = $user_avatar;
       $res = $this->repository->updateUser($data);
       return $res;
     } catch(PDOException $e) {

@@ -10,6 +10,6 @@ class Home extends BaseController
         $userModel = new UserModel();
        $result =  $userModel->home();
         
-        //return view('welcome_message');
+        return view('welcome_message');
     }
 }

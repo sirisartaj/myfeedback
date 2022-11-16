@@ -16,9 +16,10 @@ return function (App $app) {
   $app->post('/editprivileges', \App\Action\EditPrivileges::class);
   $app->post('/updaterolestatus', \App\Action\UpdateRoleStatus::class);
 
-  //Admin Users
+  //Admin Users 
   $app->post('/users/checklogin',\App\Action\CheckLogin::class);
-	$app->post('/users/adduser',\App\Action\AddUser::class);
+	//$app->post('/users/adduser',\App\Action\AddUser::class);
+  $app->post('/users/adduser', \App\Action\Users\AddUser::class);
 	$app->get('/users/getuser/{userId}', \App\Action\GetUser::class);
 	$app->get('/users/getusers',\App\Action\GetUsers::class);
 	$app->post('/users/updateuser',\App\Action\UpdateUser::class);
@@ -113,6 +114,7 @@ return function (App $app) {
   //Banners
   $app->get('/banners/getbanners', \App\Action\Banners\GetBanners::class);
   $app->post('/banners/addbanner', \App\Action\Banners\AddBanner::class);
+  
   $app->get('/banners/getbanner/{bannerId}', \App\Action\Banners\GetBanner::class);
   $app->post('/banners/updatebanner', \App\Action\Banners\UpdateBanner::class);
   $app->delete('/banners/deletebanner/{bannerId}', \App\Action\Banners\DeleteBanner::class);

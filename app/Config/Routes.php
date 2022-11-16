@@ -40,7 +40,9 @@ $routes->set404Override();
  * Route Definitions
  * --------------------------------------------------------------------
  */
-$routes->get('/', 'SignupController::index');
+$routes->get('/', 'SigninController::index');
+$routes->get('/logincheck', 'SigninController::logincheck');
+$routes->get('/adduser', 'ProfileController::adduser');
 $routes->get('/home', 'Home::index');
 $routes->get('/signup', 'SignupController::index');
 $routes->match(['get', 'post'], 'SignupController/store', 'SignupController::store');
@@ -52,6 +54,7 @@ $routes->get('feedbackform/(:any)', 'feedbackController::userfeedbackform/$1');
 $routes->get('addqfeedback', 'feedbackController::addquestionstofeedbackform');
 $routes->post('submitquestion', 'feedbackController::qstore');
 $routes->get('showfeedbackform/(:any)', 'feedbackController::showquestionstofeedbackform/$1');
+$routes->post('storeuser', 'ProfileController::storeuser');
 $routes->post('savefeedback', 'feedbackController::saveuserfeedback');
 $routes->post('feebackreport', 'feedbackController::feebackreport');
 

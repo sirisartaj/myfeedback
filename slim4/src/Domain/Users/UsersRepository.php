@@ -102,11 +102,10 @@ class UsersRepository
       return $status;
     } 
   }
-  public function adduser($data) {
-    try {
-      
+  public function addUser($data) {
+    try {      
       extract($data);
-      $sql = "INSERT INTO ".DBPREFIX."users SET user_fname=:user_fname, user_lname=:user_lname ,user_gender=:user_gender,user_mobile=:user_mobile,user_email=:user_email,user_password=:user_password,temp_password=:temp_password,user_dob=:user_dob,user_level=:user_level, user_avatar = :user_avatar,user_create=:user_create,lastlogin=:lastlogin, user_status = :user_status , created_by = :created_by";
+      $sql = "INSERT INTO ".DBPREFIX."_users SET user_fname=:user_fname, user_lname=:user_lname ,user_gender=:user_gender,user_mobile=:user_mobile,user_email=:user_email,user_password=:user_password,temp_password=:temp_password,user_dob=:user_dob,user_level=:user_level, user_avatar = :user_avatar,user_create=:user_create,lastlogin=:lastlogin, user_status = :user_status , created_by = :created_by";
       $stmt = $this->connection->prepare($sql);  
       $created_date = date("Y-m-d H:i:s");
       $stmt->bindParam(":user_fname", $user_fname); 
@@ -121,8 +120,8 @@ class UsersRepository
       $stmt->bindParam(":user_level", $user_level);
       $stmt->bindParam(":lastlogin", $lastlogin);
       $stmt->bindParam(":user_status", $user_status);
-      $stmt->bindParam(':user_create',$created_date);
-      $stmt->bindParam(':created_by',$created_by);
+      $stmt->bindParam(':user_create',date('Y-m-d H:i:s'));
+      $stmt->bindParam(':created_by',$user_id);
       $res = $stmt->execute();
       $user_id = $this->connection->lastInsertId();
       if($user_id != ''  && $user_id != '0'){
@@ -131,6 +130,7 @@ class UsersRepository
           "message" => "Added Successfully");
         return $status;
       }else{
+        //print_r($res);
         $status = array(
           "status" => ERR_NOT_MODIFIED,
           "message" => "Not Added Successfully");
@@ -147,16 +147,19 @@ class UsersRepository
   public function updateUser($data) 
   {
     try {
-      $sql  = "UPDATE ".DBPREFIX."_bannerdetails SET banner_title=:banner_title, banner_image=:banner_image, target_url=:target_url , status = :status ,updated_date = :updated_date, modified_by = :modified_by WHERE banner_id = :banner_id";   
+      $sql  = "UPDATE ".DBPREFIX."_users SET user_fname=:user_fname, user_lname=:user_lname, user_avatar=:user_avatar ,user_gender=:user_gender, user_mobile=:user_mobile,user_email=:user_email,user_level=:user_level,user_dob=:user_dob, user_status = :user_status ,updated_date = :updated_date, modified_by = :modified_by WHERE user_id = :user_id";   
       $stmt = $this->connection->prepare($sql);
       $modified_date = date("Y-m-d H:i:s");  
-      $stmt->bindParam(":banner_title", $bannerTitle); 
-      $stmt->bindParam(":banner_image", $bannerImage);
-      $stmt->bindParam(":target_url", $targetUrl);
-      $stmt->bindParam(":status", $status);
-      $stmt->bindParam(":updated_date",$modified_date);
-      $stmt->bindParam(":modified_by",$userBy);
-      $stmt->bindParam(":banner_id", $bannerId);
+      $stmt->bindParam(":user_id", $user_id); 
+      $stmt->bindParam(":user_fname", $user_fname); 
+      $stmt->bindParam(":user_lname", $user_lname); 
+      $stmt->bindParam(":user_avatar", $user_avatar);
+      $stmt->bindParam(":user_gender", $user_gender);
+      $stmt->bindParam(":user_mobile", $user_mobile);
+      $stmt->bindParam(":user_email", $user_email);      
+      $stmt->bindParam(":user_dob", $user_dob);
+      $stmt->bindParam(":user_level", $user_level);
+      $stmt->bindParam(":user_status", $user_status);
       $res = $stmt->execute();
       if($res){
         $status = array(

@@ -1,12 +1,5 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>Codeigniter Auth User Registration Example</title>
-</head>
-<body>
+<?php echo view('header'); ?>
+    <div class="app-content main-content mt-0">
     <div class="container mt-5">
         <div class="row justify-content-md-center">
             <div class="col-5">
@@ -36,5 +29,9 @@
             </div>
         </div>
     </div>
-</body>
+</div>
+<?php echo view('footer_text'); ?>
+    </div>
+    <?php echo view('footer'); ?>
+  </body>
 </html>

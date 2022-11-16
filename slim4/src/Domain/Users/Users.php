@@ -1,54 +1,54 @@
 <?php
-namespace App\Domain\Banners;
+namespace App\Domain\Users;
 
-use App\Domain\Banners\BannersRepository;
+use App\Domain\Users\UsersRepository;
 use App\Exception\ValidationException;
 use App\Utilities\ImageUpload;
 
 /**
  * Service.
  */
-final class Banners
+final class Users
 {
   /**
-   * @var BannersRepository
+   * @var UsersRepository
    */
   private $repository;
   /**
    * The constructor.
    *
-   * @param BannersRepository $repository The repository
+   * @param UsersRepository $repository The repository
    */
-  public function __construct(BannersRepository $repository)
+  public function __construct(UsersRepository $repository)
   {
     $this->repository = $repository;
   }
-  public function getBanners(): array
+  public function getUsers(): array
   {        
-    $Banners = $this->repository->getBanners();
-    return $Banners;
+    $Users = $this->repository->getUsers();
+    return $Users;
   }
-  public function getBanner($data): array 
+  public function getUser($data): array 
   {
-    $Banners = (array) $this->repository->getBanner($data);
-    return $Banners;
+    $Users = (array) $this->repository->getUser($data);
+    return $Users;
   }
-  public function deleteBanner($data) :array 
+  public function deleteUser($data) :array 
   {
-    $banner = $this->repository->deleteBanner($data);
-    return $banner;
+    $User = $this->repository->deleteUser($data);
+    return $User;
   }
-  public function addBanner($data) : array 
+  public function addUser($data) : array 
   {
     try {
       extract($data);
-      if(isset($bannerImage)&&!empty($bannerImage)){
-        $filedir = UPLOADPATH."banners/"; 
+      if(isset($UserImage)&&!empty($UserImage)){
+        $filedir = UPLOADPATH."Users/"; 
         $randName = rand(10101010, 9090909090);
-        $newName = "banner_". $randName;
-        $ext = substr($bannerImage['name'], strrpos($bannerImage['name'], '.') + 1);
+        $newName = "User_". $randName;
+        $ext = substr($UserImage['name'], strrpos($UserImage['name'], '.') + 1);
         $ImageUpload = new ImageUpload;
-        $ImageUpload->File = $bannerImage;
+        $ImageUpload->File = $UserImage;
         $ImageUpload->method = 1;
         $ImageUpload->SavePath = $filedir;
         $ImageUpload->NewWidth = '100';
@@ -56,10 +56,10 @@ final class Banners
         $ImageUpload->NewName = $newName;
         $ImageUpload->OverWrite = true;
         $err = $ImageUpload->UploadFile();
-        $bannerImage = $newName.".".strtolower($ext);
+        $UserImage = $newName.".".strtolower($ext);
       }
-      $data['bannerImage'] = $bannerImage;
-      $res = $this->repository->addBanner($data);
+      $data['UserImage'] = $UserImage;
+      $res = $this->repository->addUser($data);
       return $res;
     } catch(PDOException $e) {
       $status = array(
@@ -69,17 +69,17 @@ final class Banners
       return $status;
     } 
   }
-  public function updateBanner($data) : array 
+  public function updateUser($data) : array 
   {
     try {
       extract($data);
-      if(isset($bannerImage)&&!empty($bannerImage)){
-        $filedir = UPLOADPATH."banners/"; 
+      if(isset($UserImage)&&!empty($UserImage)){
+        $filedir = UPLOADPATH."Users/"; 
         $randName = rand(10101010, 9090909090);
-        $newName = "banner_". $randName;
-        $ext = substr($bannerImage['name'], strrpos($bannerImage['name'], '.') + 1);
+        $newName = "User_". $randName;
+        $ext = substr($UserImage['name'], strrpos($UserImage['name'], '.') + 1);
         $ImageUpload = new ImageUpload;
-        $ImageUpload->File = $bannerImage;
+        $ImageUpload->File = $UserImage;
         $ImageUpload->method = 1;
         $ImageUpload->SavePath = $filedir;
         $ImageUpload->NewWidth = '100';
@@ -87,10 +87,10 @@ final class Banners
         $ImageUpload->NewName = $newName;
         $ImageUpload->OverWrite = true;
         $err = $ImageUpload->UploadFile();
-        $bannerImage = $newName.".".strtolower($ext);
+        $UserImage = $newName.".".strtolower($ext);
       }
-      $data['bannerImage'] = $bannerImage;
-      $res = $this->repository->updateBanner($data);
+      $data['UserImage'] = $UserImage;
+      $res = $this->repository->updateUser($data);
       return $res;
     } catch(PDOException $e) {
       $status = array(
@@ -100,8 +100,8 @@ final class Banners
       return $status;
     } 
   }
-  public function updateBannerStatus($data) {
-    $banner = $this->repository->updateBannerStatus($data);
-    return $banner;
+  public function updateUserStatus($data) {
+    $User = $this->repository->updateUserStatus($data);
+    return $User;
   }
 }

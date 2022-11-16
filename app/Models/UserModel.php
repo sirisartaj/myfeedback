@@ -19,8 +19,17 @@ class UserModel extends Model{
         $data = array('banner_title'=>"first banner");
         $url = baseURL1.'/banners/addbanner';//exit;
 
-        $home->CallAPI('POST',$url,$data);
-       print_r($controllerData);exit;
+       return $home->CallAPI('POST',$url,$data);
+      // print_r($controllerData);exit;
         //$this->CallAPI('POST','banners/getbanner',$data);
+    }
+
+    public function adduser($data){
+
+         $home = new home();
+       
+        $url = baseURL1.'/users/adduser';//exit;
+
+       return $home->CallAPI('POST',$url,$data);
     }
 }

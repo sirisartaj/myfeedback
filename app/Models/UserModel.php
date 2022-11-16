@@ -38,13 +38,10 @@ class UserModel extends Model{
 
     public function adduser($data){
 
-         $home = new home();
-       
+         $home = new home();       
         $url = baseURL1.'/users/adduser';
-        //print_r($data);exit;
-
-       $a = $home->CallAPI('POST',$url,$data);
-       print_r($a);exit;
+        return $home->CallAPI('POST',$url,$data);
+       
     }
 
     public function signinuser($data){

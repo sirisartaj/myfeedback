@@ -88,13 +88,13 @@
 									<div class="card">
 										
 										<div class="card-body">
-<?php print_r($validation->listErrors());
+<?php //print_r($validation->listErrors());
 
-$validation->getError('user_email');
+//$validation->getError('user_email');
 
-if ($validation->hasError('user_email')) {
+/*if ($validation->hasError('user_email')) {
     echo $validation->getError('user_email');
-}
+}*/
 ?>
 											<form class="g-3 " action="<?php echo base_url(); ?>/storeuser" method="post" id="adduserform">
 											<div id="wizard1">

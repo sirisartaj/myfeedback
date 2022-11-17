@@ -62,7 +62,7 @@ abstract class BaseController extends Controller
 
           curl_setopt($curl, CURLOPT_POST, true);
           if ($data) {
-            $data['user_id'] = "1"; 
+           if(!$data['user_id']){ $data['user_id'] = "1"; }
             $data['apiKey'] = RESTAPYKEY;                    
             $data = json_encode($data);
               curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
@@ -71,7 +71,7 @@ abstract class BaseController extends Controller
         case "PUT":
           curl_setopt($curl, CURLOPT_POST, 1);
           curl_setopt($curl, CURLOPT_HTTPHEADER,array('Content-Type: multipart/form-data'));
-          $data['user_id'] = "1"; 
+          if(!$data['user_id']){ $data['user_id'] = "1"; }
           $data['apiKey'] = RESTAPYKEY;                    
           curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
           break;

@@ -20,9 +20,9 @@ return function (App $app) {
   $app->post('/users/checklogin',\App\Action\CheckLogin::class);
 	//$app->post('/users/adduser',\App\Action\AddUser::class);
   $app->post('/users/adduser', \App\Action\Users\AddUser::class);
-	$app->get('/users/getuser/{userId}', \App\Action\GetUser::class);
+	$app->get('/users/getuser/{userId}', \App\Action\Users\GetUser::class);
 	$app->get('/users/getusers',\App\Action\GetUsers::class);
-	$app->post('/users/updateuser',\App\Action\UpdateUser::class);
+	$app->post('/users/updateuser',\App\Action\Users\UpdateUser::class);
 	$app->post('/users/updateuserpassword',\App\Action\UpdateUserPassword::class);
 	$app->post('/users/forgotpassword',\App\Action\ForgotPassword::class);
 	$app->delete('/users/deleteuser/{userId}',\App\Action\DeleteUser::class);

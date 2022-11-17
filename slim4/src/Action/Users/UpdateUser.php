@@ -1,33 +1,28 @@
 <?php
+
 namespace App\Action\Users;
 
 use App\Domain\Users\Users;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class AddUser
+final class UpdateUser
 {
   private $Users;
-  public function __construct(Users $users)
+  public function __construct(Users $Users)
   {
-    $this->users = $users;
+    $this->Users = $Users;
   }
   public function __invoke(
       ServerRequestInterface $request, 
       ResponseInterface $response
   ): ResponseInterface 
   {
-      //$data = $request->getParsedBody();
-     //$data =(array) json_decode($data);
-
-     $data = $request->getBody();
-    $data =(array) json_decode($data);
-
-    //print_r($data);exit;
+      $data = $request->getBody();
+     $data =(array) json_decode($data);
     $data = array_merge($data, $_FILES);
-   // print_r($data);exit;
-    $users = $this->users->addUser($data);
-    $response->getBody()->write((string)json_encode($users));
+    $Users = $this->Users->updateUser($data);
+    $response->getBody()->write((string)json_encode($Users));
     return $response
           ->withHeader('Content-Type', 'application/json');
   }

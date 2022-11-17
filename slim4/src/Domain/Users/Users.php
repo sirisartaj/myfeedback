@@ -42,6 +42,7 @@ final class Users
   {
     try {
       extract($data);
+
       if(isset($user_avatar)&&!empty($user_avatar)){
         $filedir = UPLOADPATH."Users/"; 
         $randName = rand(10101010, 9090909090);
@@ -72,8 +73,10 @@ final class Users
   public function updateUser($data) : array 
   {
     try {
+      //print_r($data);echo "in userco";exit;
       extract($data);
-      if(isset($user_avatar)&&!empty($user_avatar)){
+
+      /*if(isset($user_avatar)&&!empty($user_avatar)){
         $filedir = UPLOADPATH."Users/"; 
         $randName = rand(10101010, 9090909090);
         $newName = "User_". $randName;
@@ -88,8 +91,8 @@ final class Users
         $ImageUpload->OverWrite = true;
         $err = $ImageUpload->UploadFile();
         $user_avatar = $newName.".".strtolower($ext);
-      }
-      $data['user_avatar'] = $user_avatar;
+      }*/
+      //$data['user_avatar'] = $user_avatar;
       $res = $this->repository->updateUser($data);
       return $res;
     } catch(PDOException $e) {

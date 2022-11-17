@@ -21,6 +21,7 @@ final class AddBanner
      // $data = $request->getParsedBody();
     // $data =(array) json_decode($data);
     $data = array_merge($_POST, $_FILES);
+    print_r($data);exit;
     $banners = $this->banners->addBanner($data);
     $response->getBody()->write((string)json_encode($banners));
     return $response

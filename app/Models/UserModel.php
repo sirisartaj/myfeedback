@@ -38,9 +38,26 @@ class UserModel extends Model{
 
     public function adduser($data){
 
-         $home = new home();       
+         $home = new home();   
+         //print_r($data);echo "in codeigniter usermodel";exit;    
         $url = baseURL1.'/users/adduser';
         return $home->CallAPI('POST',$url,$data);
+       
+    } 
+
+    public function edituser($data){
+
+        $home = new home();       
+        $url = baseURL1.'/users/updateuser';
+        return $home->CallAPI('POST',$url,$data);
+       
+    } 
+    public function getuser($user_id){
+
+        $home = new home();  
+        $data = array();     
+        $url = baseURL1.'/users/getuser/'.$user_id;
+        return $home->CallAPI('GET',$url,$data);
        
     }
 

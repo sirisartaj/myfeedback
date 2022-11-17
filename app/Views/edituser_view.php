@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-		
 		<!-- META DATA -->
 		<meta charset="UTF-8">
 		<meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
@@ -65,11 +64,8 @@
 						<div class="main-container container-fluid">
 							<!-- PAGE-HEADER -->
 							<div class="page-header">
-								<?php echo $_SESSION['message'];?>
 								<div>
-									<h1 class="page-title">Add User Form &nbsp;
-
-										<!--<a href="http://vyz.bz/ridingsolo_admin/#" class="btn btn-primary" data-bs-target="#modaldemo1" data-bs-toggle="modal">Modal Form</a>-->
+									<h1 class="page-title">Edit User Form &nbsp;
 									</h1>
 
 								</div>
@@ -97,7 +93,7 @@
     echo $validation->getError('user_email');
 }*/
 ?>
-											<form class="g-3 " action="<?php echo base_url(); ?>/storeuser" method="post" id="adduserform">
+											<form class="g-3 " action="<?php echo base_url(); ?>/edituserstore" method="post" id="edituserform">
 											<div id="wizard1">
 
 												<h4>Login Information</h4>
@@ -108,7 +104,8 @@
 																<div class="card-body row p-0">
 													<div class="col-lg-4">
 													  <label for="user_fname" class="form-label">User Name</label>
-													  <input type="text" class="form-control" id="user_fname" name="user_fname" placeholder="First Name" required value="<?= set_value('user_fname');?>">
+													  <input type="hidden" name="user_id" value="<?php echo $user['user_id'];?>"/>
+													  <input type="text" class="form-control" id="user_fname" name="user_fname" placeholder="First Name" required value="<?php echo($user['user_fname'])?$user['user_fname']: set_value('user_fname');?>">
 													  <span class="text-danger">
 													  	<?php 
 													  		if ($validation->hasError('user_fname')) {
@@ -119,7 +116,7 @@
 													</div>
 													<div class="col-lg-4">
 													  <label for="user_lname" class="form-label">User Last Name</label>
-													  <input type="text" class="form-control" id="user_lname" name="user_lname" placeholder="Last Name" required value="<?= set_value('user_lname');?>">
+													  <input type="text" class="form-control" id="user_lname" name="user_lname" placeholder="Last Name" required value="<?php echo($user['user_lname'])?$user['user_lname']: set_value('user_lname');?> ">
 													  <span class="text-danger">
 													  	<?php 
 													  		if ($validation->hasError('user_lname')) {
@@ -130,7 +127,7 @@
 													</div>
 													<div class="col-lg-4">
 													  <label for="user_email" class="form-label">User Email</label>
-													  <input type="email" class="form-control" id="user_email" name="user_email" placeholder="email" required value="<?= set_value('user_email');?>" >
+													  <input type="email" class="form-control" id="user_email" name="user_email" placeholder="email" required value="<?php echo($user['user_email'])?$user['user_email']: set_value('user_email');?>" >
 													  <span class="text-danger">
 													  	<?php 
 													  		if ($validation->hasError('user_email')) {
@@ -139,24 +136,11 @@
 													  	?>
 													  </span>
 													</div>
-													<div class="col-lg-4">
-													  <label for="user_password" class="form-label">User Password</label>
-													  <input type="password" class="form-control" id="user_password" name="user_password" placeholder="user password" required value="<?= set_value('user_password');?>">
-													</div>
-													<div class="col-lg-4">
-													  <label for="cpassword" class="form-label">Confirm password</label>
-													  <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm password" required value="<?= set_value('cpassword');?>">
-													  <span class="text-danger">
-													  	<?php 
-													  		if ($validation->hasError('cpassword')) {
-															    echo $validation->getError('cpassword');
-															}
-													  	?>
-													  </span>
-													</div>
+													
+													
 													<div class="col-lg-4">
 													  <label for="user_mobile" class="form-label">User Mobile</label>
-													  <input type="text" class="form-control" id="user_mobile" name="user_mobile" placeholder="Mobile" required value="<?= set_value('user_mobile');?>">
+													  <input type="text" class="form-control" id="user_mobile" name="user_mobile" placeholder="Mobile" required value="<?php echo($user['user_mobile'])?$user['user_mobile']: set_value('user_mobile');?>">
 													  <span class="text-danger">
 													  	<?php 
 													  		if ($validation->hasError('user_mobile')) {
@@ -170,9 +154,9 @@
 														<label class="form-label">Gender</label>
 														<select class="form-control select2-show-search form-select" data-placeholder="Choose one" name="user_gender">
 															<option label="Choose one"></option>
-															<option value="male">Male</option>
-															<option value="female">Female</option>
-															<option value="others">Both</option>
+															<option <?php echo ($user['user_gender']=='male')?'Selected':''?> value="male">Male</option>
+															<option <?php echo ($user['user_gender']=='female')?'Selected':''?> value="female">Female</option>
+															<option <?php echo ($user['user_gender']=='others')?'Selected':''?> value="others">Both</option>
 															
 														</select>
 													</div>
@@ -183,9 +167,9 @@
 														<label class="form-label">Role</label>
 														<select class="form-control select2-show-search form-select" data-placeholder="Choose one" name="user_level">
 															<option label="Choose one"></option>
-															<option value="1">Admin</option>
-															<option value="2">User1</option>
-															<option value="3">user2</option>
+															<option <?php echo ($user['user_level']=='1')?'Selected':''?> value="1">Admin</option>
+															<option <?php echo ($user['user_level']=='2')?'Selected':''?> value="2">User1</option>
+															<option <?php echo ($user['user_level']=='3')?'Selected':''?> value="3">user2</option>
 															
 														</select>
 													</div>
@@ -195,28 +179,21 @@
 															<div class="input-group">
 																<div id="datePickerStyle1" class="input-group date" data-date-format="mm-dd-yyyy">
 																	<span class="input-group-addon input-group-text bg-primary-transparent"><i class="fe fe-calendar text-primary-dark"></i></span>
-																	<input class="form-control" id="bootstrapDatePicker1" type="text" name="user_dob"/>
+																	<input class="form-control" id="bootstrapDatePicker1" type="text" name="user_dob" value="<?php echo $user['user_dob']?$user['user_dob']:'';?>"/>
 																</div>
 															</div>
 													</div>
-													<div class="col-lg-4">
+													<!--<div class="col-lg-4">
 														<label for="formFile" class="form-label">User Avatar</label>
 														<input class="form-control file-input" type="file" id="formFile" name="user_avatar">
-													</div>
-													<div class="col-lg-12" style="margin-top: 16px;">
-													<div class="checkbox">
-													<div class="custom-checkbox custom-control">
-														<input type="checkbox" data-checkboxes="mygroup" class="custom-control-input" id="checkbox-1">
-														<label for="checkbox-1" class="custom-control-label mt-1">I Accept <a href="http://vyz.bz/ridingsolo_admin/">Terms & Conditions</a></label>
-													</div>
-												</div>
-												</div>
+													</div>-->
+													
 											</div>
 										</div>
 									</div>
 								</div>	
 								<div class="col-lg-12 text-rigth" style="margin-top: 30px;float: right;">	
-								<button type="submit" name="add" class="btn btnadd ">ADD</button>
+								<button type="submit" name="edit" class="btn btnadd ">Edit</button>
 								</div>	
 											</div>
 											

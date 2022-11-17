@@ -53,7 +53,7 @@ class UsersRepository
   public function getuser($data) {
     try {
       extract($data);
-      $sql = "SELECT user_id , user_mobile,user_email,user_fname,user_lname,user_gender,user_dob,user_level,user_avatar,user_create,lastlogin,user_status,modified_date, created_by AS createdBy, modified_by AS modifiedBy FROM ".DBPREFIX."users WHERE user_id=:user_id";
+      $sql = "SELECT user_id , user_mobile,user_email,user_fname,user_lname,user_gender,user_dob,user_level,user_avatar,user_create,lastlogin,user_status,modified_date, created_by AS createdBy, modified_by AS modifiedBy FROM ".DBPREFIX."_users WHERE user_id=:user_id";
       $stmt = $this->connection->prepare($sql);  
       $stmt->bindParam(":user_id", $userId); 
       $stmt->execute();
@@ -147,21 +147,41 @@ class UsersRepository
   public function updateUser($data) 
   {
     try {
-      $sql  = "UPDATE ".DBPREFIX."_users SET user_fname=:user_fname, user_lname=:user_lname, user_avatar=:user_avatar ,user_gender=:user_gender, user_mobile=:user_mobile,user_email=:user_email,user_level=:user_level,user_dob=:user_dob, user_status = :user_status ,updated_date = :updated_date, modified_by = :modified_by WHERE user_id = :user_id";   
+      //print_r($data);exit;
+      extract($data);
+
+      
+      $sql  = "UPDATE ".DBPREFIX."_users SET user_fname=:user_fname, user_lname=:user_lname, user_gender=:user_gender, user_mobile=:user_mobile,user_email=:user_email,user_level=:user_level,user_dob=:user_dob, user_status = :user_status ,modified_date = :modified_date, modified_by = :modified_by WHERE user_id = :user_id";   
       $stmt = $this->connection->prepare($sql);
       $modified_date = date("Y-m-d H:i:s");  
+      $modified_by = "1";  
       $stmt->bindParam(":user_id", $user_id); 
       $stmt->bindParam(":user_fname", $user_fname); 
-      $stmt->bindParam(":user_lname", $user_lname); 
-      $stmt->bindParam(":user_avatar", $user_avatar);
+      $stmt->bindParam(":user_lname", $user_lname);
       $stmt->bindParam(":user_gender", $user_gender);
       $stmt->bindParam(":user_mobile", $user_mobile);
       $stmt->bindParam(":user_email", $user_email);      
       $stmt->bindParam(":user_dob", $user_dob);
       $stmt->bindParam(":user_level", $user_level);
       $stmt->bindParam(":user_status", $user_status);
+      $stmt->bindParam(":modified_date", $modified_date);
+      $stmt->bindParam(":modified_by", $modified_by);
+      //print_r($sql);exit;
       $res = $stmt->execute();
+     /* echo " ---------user_id : ".$user_id;
+      echo ",user_fname : ".$user_fname;
+      echo ",user_lname : ".$user_lname;
+      echo ",user_gender : ".$user_gender;
+      echo ",user_mobile : ".$user_mobile;
+      echo ",user_email : ".$user_email;
+      echo ",user_dob : ".$user_dob;
+      echo ",user_level : ".$user_level;
+      echo ",user_status : ".$user_status;
+      echo ",modified_date : ".$modified_date;
+      echo ",modified_by : ".$modified_by;*/
+      //print_r($this->connection->mysql_error());exit;
       if($res){
+        //print_r($res);exit;
         $status = array(
           "status" => ERR_OK,
           "message" => "Updated Successfully");

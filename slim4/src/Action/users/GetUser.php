@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Action\Banners;
+namespace App\Action\Users;
 
-use App\Domain\Banners\Banners;
+use App\Domain\Users\Users;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class GetBanner
+final class GetUser
 {
-  private $banners;
-  public function __construct(Banners $banners)
+  private $Users;
+  public function __construct(Users $Users)
   {
-    $this->banners = $banners;
+    $this->Users = $Users;
   }
   public function __invoke(
       ServerRequestInterface $request, 
       ResponseInterface $response, $args
   ): ResponseInterface 
   {
-    $banners = $this->banners->getBanner($args);
-    $response->getBody()->write((string)json_encode($banners));
+    $Users = $this->Users->getUser($args);
+    $response->getBody()->write((string)json_encode($Users));
     return $response
           ->withHeader('Content-Type', 'application/json');
   }

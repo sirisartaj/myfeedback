@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Action\Banners;
+namespace App\Action\Users;
 
-use App\Domain\Banners\Banners;
+use App\Domain\Users\Users;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class UpdateBannerStatus
+final class UpdateUserStatus
 {
-  private $Banners;
-  public function __construct(Banners $banners)
+  private $Users;
+  public function __construct(Users $Users)
   {
-    $this->banners = $banners;
+    $this->Users = $Users;
   }
   public function __invoke(
       ServerRequestInterface $request, 
@@ -20,8 +20,8 @@ final class UpdateBannerStatus
   {
      $data = $request->getParsedBody();
     $data =(array) json_decode($data);
-    $banners = $this->banners->updateBannerStatus($data);
-    $response->getBody()->write((string)json_encode($banners));
+    $Users = $this->Users->updateUserStatus($data);
+    $response->getBody()->write((string)json_encode($Users));
     return $response
           ->withHeader('Content-Type', 'application/json');
   }

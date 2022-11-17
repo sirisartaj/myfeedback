@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,8 +26,13 @@
 
 		<!--- FONT-ICONS CSS -->
 		<link href="https://vyz.bz/ridingsolo_admin/assets/css/icons.css" rel="stylesheet" />
+		
 
-		<link href="https://vyz.bz/ridingsolo_admin/assets/switcher/demo.css" rel="stylesheet" />	
+		<link href="https://vyz.bz/ridingsolo_admin/assets/switcher/demo.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />	
+
+		<link href="https://vyz.bz/ridingsolo_admin/assets/iconfonts/feather/feather.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.5.5/css/simple-line-icons.min.css" integrity="sha512-QKC1UZ/ZHNgFzVKSAhV5v5j73eeL9EEN289eKAEFaAjgAiobVAnVv/AGuPbXsKl1dNoel3kNr6PYnSiTzVVBCw==" crossorigin="anonymous" referrerpolicy="no-referrer" />	
 	</head>
 
 	<body class="ltr app sidebar-mini light-mode">

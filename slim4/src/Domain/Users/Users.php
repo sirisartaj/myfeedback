@@ -107,4 +107,8 @@ final class Users
     $User = $this->repository->updateUserStatus($data);
     return $User;
   }
+  public function updateUserPassword($data) {
+    $User = $this->repository->updateUserPassword($data);
+    return $User;
+  }
 }

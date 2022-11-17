@@ -42,8 +42,7 @@ $routes->set404Override();
  */
 $routes->get('/', 'SigninController::index');
 $routes->get('/logincheck', 'SigninController::logincheck');
-$routes->get('/adduser', 'ProfileController::adduser');
-$routes->get('/getuser/(:any)', 'ProfileController::getuser/$1');
+
 $routes->get('/home', 'Home::index');
 $routes->get('/signup', 'SignupController::index');
 $routes->match(['get', 'post'], 'SignupController/store', 'SignupController::store');
@@ -55,10 +54,29 @@ $routes->get('feedbackform/(:any)', 'feedbackController::userfeedbackform/$1');
 $routes->get('addqfeedback', 'feedbackController::addquestionstofeedbackform');
 $routes->post('submitquestion', 'feedbackController::qstore');
 $routes->get('showfeedbackform/(:any)', 'feedbackController::showquestionstofeedbackform/$1');
-$routes->post('storeuser', 'ProfileController::storeuser');
-$routes->post('edituserstore', 'ProfileController::edituserstore');
 $routes->post('savefeedback', 'feedbackController::saveuserfeedback');
 $routes->post('feebackreport', 'feedbackController::feebackreport');
+
+
+
+$routes->get('/adduser', 'ProfileController::adduser');
+$routes->get('/getuser/(:any)', 'ProfileController::getuser/$1');
+$routes->get('/changepassword/(:any)', 'ProfileController::changepassword/$1');
+$routes->get('/getusers', 'ProfileController::getusers');
+$routes->post('storeuser', 'ProfileController::storeuser');
+$routes->post('changepwd', 'ProfileController::changepwd');
+$routes->post('edituserstore', 'ProfileController::edituserstore');
+
+
+$routes->get('/addrole', 'RoleController::addrole');
+$routes->post('storerole', 'RoleController::storerole');
+$routes->get('/getrole/(:any)', 'RoleController::getrole/$1');
+$routes->post('editrolestore', 'RoleController::editrolestore');
+$routes->get('/getroles', 'RoleController::index');
+
+
+
+
 
 /*
  * --------------------------------------------------------------------

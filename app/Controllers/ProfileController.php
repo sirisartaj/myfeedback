@@ -125,5 +125,57 @@ class ProfileController extends Controller
             $data['validation'] = $this->validator;
         }
         echo view('edituser_view',$data);
-    }//
+    }
+
+    function getusers(){
+        $userModel = new UserModel();
+        helper(['form']);
+        $rules = [ ];
+        $user = $userModel->getusers();
+        $data = json_decode(json_encode($user),true);
+        //print_r($data['users']);exit;
+        $data['Headding']="User list";
+        
+        echo view('adminuser_view',$data);
+    }
+
+    function changepassword($user_id){
+        //$userModel = new UserModel();
+        helper(['form']);
+        $rules = [ ];
+        if($this->validate($rules)){}else{
+            $data['validation'] = $this->validator;
+        }
+        $data['user_id'] = $user_id;
+        echo view('changepassword',$data);
+    }
+
+    function changepwd(){
+        $userModel = new UserModel();
+        helper(['form']);
+        $rules = [            
+            'user_password'      => 'required|min_length[4]|max_length[50]',
+            'cpassword'  => 'matches[user_password]'
+        ];
+          
+        if($this->validate($rules)){ 
+            $userModel = new UserModel();
+            $data = [                
+                'user_password' => password_hash($this->request->getVar('user_password'), PASSWORD_DEFAULT),               
+                'temp_password' => $this->request->getVar('user_password'),               
+            ];
+           
+            $a = $userModel->changepwd($data);
+           // print_r($a);exit;
+            $_SESSION['message'] = $a->message;
+            return redirect()->to('getusers');
+        }else{
+            $data['validation'] = $this->validator;
+            $data['user_id'] = $user_id;
+            echo view('changepassword', $data);
+        }
+        
+        
+        echo view('getusers',$user_id);
+    }
 }

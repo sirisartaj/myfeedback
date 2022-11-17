@@ -1,25 +1,25 @@
 <?php
 
-namespace App\Action\Users;
+namespace App\Action\Roles;
 
-use App\Domain\Users\Users;
+use App\Domain\Roles\Roles;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class GetUsers
+final class GetRoles
 {
-  private $Users;
-  public function __construct(Users $Users)
+  private $Roles;
+  public function __construct(Roles $Roles)
   {
-    $this->Users = $Users;
+    $this->Roles = $Roles;
   }
   public function __invoke(
       ServerRequestInterface $request, 
       ResponseInterface $response
   ): ResponseInterface 
   {
-    $Users = $this->Users->getUsers();
-    $response->getBody()->write((string)json_encode($Users));
+    $Roles = $this->Roles->getRoles();
+    $response->getBody()->write((string)json_encode($Roles));
     return $response
           ->withHeader('Content-Type', 'application/json');
   }

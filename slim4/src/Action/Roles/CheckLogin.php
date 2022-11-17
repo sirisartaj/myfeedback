@@ -6,7 +6,7 @@ use App\Domain\Users\Users;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-final class GetUsers
+final class CheckLogin
 {
   private $Users;
   public function __construct(Users $Users)

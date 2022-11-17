@@ -378,7 +378,7 @@
 								<div class="col-md-12 mb-3">
 									<div class="btn-list float-end">
 										
-										<a href="<?php base_url();?>/adduser" class="btn btn-info">
+										<a href="<?php echo base_url();?>/addrole" class="btn btn-info">
 											<i class="fe fe-plus-circle"></i>
 											Add New 
 										</a>
@@ -392,9 +392,8 @@
 													<thead class="table-head">
 														<tr>
 															<th class="bg-transparent border-bottom-0 text-center">S.No</th>
-															<th class="bg-transparent border-bottom-0 text-center">First Name</th>
-															<th class="bg-transparent border-bottom-0 text-center">Last Name</th>
-															<th class="bg-transparent border-bottom-0 text-center">Email</th>
+															<th class="bg-transparent border-bottom-0 text-center"> Name</th>
+															
 															<th class="bg-transparent border-bottom-0 text-center">Created Date</th>
 															<th class="bg-transparent border-bottom-0 text-center">Status</th>
 															<th class="bg-transparent border-bottom-0 text-center">Actions</th>
@@ -402,38 +401,29 @@
 													</thead>
 													<tbody class="table-body">
 														<?php $i=1;
-														foreach($users as $user){ ?>
+														if($Roles){
+														foreach($Roles as $Role){ ?>
 														<tr>
 															<td class="text-muted fs-14 fw-semibold text-center"><?php echo $i++;?></td>
-															<td class="text-muted fs-14 fw-semibold text-center"><?php echo $user['user_fname'];?></td>
-															<td class="text-muted fs-14 fw-semibold text-center"><?php echo $user['user_lname'];?></td>
-															<td class="text-muted fs-14 fw-semibold"><?php echo $user['user_email'];?></td>
-															<td class="text-muted fs-14 fw-semibold text-center"><?php echo $user['user_create'];?></td>
+															<td class="text-muted fs-14 fw-semibold text-center"><?php echo $Role['role_name'];?></td>
+															<td class="text-muted fs-14 fw-semibold text-center"><?php echo $Role['created_date'];?></td>
 															<td class="text-center">
 																	<a class="btn btn-sm btn-outline-primary border me-2">
+																		<?php if($Role['status']==0){ 
+																			?>
+											<iconify-icon icon="fe:check"></iconify-icon>
+																		<?php }elseif($Role['status']==1){
+																			echo 'Inactive';
+																		}else{
+																			echo "Delete";
+																		} ?>
 																		<!-- <i class="fe fe-check"></i> -->
-																		<iconify-icon icon="fe:check"></iconify-icon>
+																		
 																	</a>
 															</td>
 															<td class=" text-center">
-																	<a class="btn btn-sm btn-outline-primary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Reset password" href="<?php echo base_url();?>/changepassword/<?php echo $user['user_id']; ?>">
-
-																		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20" width="20" x="0px" y="0px"
-																 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
-															<g>
-																<g>
-																	<path class="st43" d="M25.1,46.1c-8.7,0-15.7-7-15.7-15.7v-4.6c0-3.3,2.7-5.9,5.9-5.9h19.5c3.3,0,5.9,2.7,5.9,5.9v4.6
-																		C40.8,39,33.7,46.1,25.1,46.1z M15.3,21.8c-2.2,0-3.9,1.8-3.9,3.9v4.6c0,7.6,6.1,13.7,13.7,13.7s13.7-6.1,13.7-13.7v-4.6
-																		c0-2.2-1.8-3.9-3.9-3.9H15.3z"/>
-																	<path class="st43" d="M34.3,21.8c-0.6,0-1-0.4-1-1V18c0-4.5-3.7-8.2-8.2-8.2s-8.2,3.7-8.2,8.2v2.8c0,0.6-0.4,1-1,1
-																		c-0.6,0-1-0.4-1-1V18c0-5.6,4.6-10.2,10.2-10.2S35.3,12.4,35.3,18v2.8C35.3,21.3,34.8,21.8,34.3,21.8z"/>
-																	<path class="st43" d="M25.1,36.4c-0.6,0-1-0.4-1-1v-5.5c0-0.6,0.4-1,1-1s1,0.4,1,1v5.5C26.1,36,25.6,36.4,25.1,36.4z"/>
-																</g>
-															</g>
-															</svg>
-
-																	</a>
-																	<a class="btn btn-sm btn-outline-primary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Edit">
+																	
+																	<a class="btn btn-sm btn-outline-primary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Edit" href="<?php echo base_url()?>/getrole/<?php echo $Role['role_id']; ?>">
 
 																		<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="20" width="16"  x="0px" y="0px"
 																		 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
@@ -446,13 +436,16 @@
 																	</svg>
 
 																	</a>
-																	<a class="btn btn-sm btn-outline-secondary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete">
+																	<a class="btn btn-sm btn-outline-secondary border me-2" data-bs-toggle="tooltip" data-bs-original-title="Delete" href="<?php echo base_url()?>/deleterole/<?php echo $Role['role_id']; ?>">
 																		<svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 0 24 24" width="16"><path d="M0 0h24v24H0V0z" fill="none" /><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" /></svg>
 																	</a>
 															</td>
 															
 														</tr>
-														<?php  } ?>
+														<?php  } 
+													}else{ ?>
+<tr><td colspan="5" align="center"><?php echo $message; ?></td></tr>
+													<?php }?>
 														
 
 													</tbody>

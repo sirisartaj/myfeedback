@@ -91,11 +91,12 @@ abstract class BaseController extends Controller
       }        
       curl_setopt($curl, CURLOPT_URL, $url);
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-     // print_r($data);exit;
+     // print_r($url);//exit;
+      //print_r($data);exit;
       $result = curl_exec($curl);
          
       curl_close($curl);
-      //print_r($result);exit();
+     // print_r($result);exit();
       $decoded = json_decode($result);
       // echo 'res--';print_r(trim($decoded));exit();
       if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {

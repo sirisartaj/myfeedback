@@ -202,9 +202,10 @@ class UsersRepository
   }
   public function updateUserStatus($data) {    
     try {
-      $sql = "UPDATE sg_bannerdetails SET status=:status, modified_by=:modified_by WHERE banner_id = :banner_id";
+      extract($data);
+      $sql = "UPDATE sg_Userdetails SET status=:status, modified_by=:modified_by WHERE User_id = :User_id";
       $stmt = $this->connection->prepare($sql);  
-      $stmt->bindParam(":banner_id",$bannerId);
+      $stmt->bindParam(":User_id",$UserId);
       $stmt->bindParam(":status", $status);
       $stmt->bindParam(":modified_by",$userBy);
       $res = $stmt->execute();
@@ -227,4 +228,38 @@ class UsersRepository
       return $status;
     } 
   }
+
+  public function updateUserPassword($data) {    
+    try {
+      extract($data);
+      $sql = "UPDATE sg_users SET user_password=:user_password,temp_password = :temp_password, modified_by=:modified_by WHERE user_id = :user_id";
+      $stmt = $this->connection->prepare($sql);  
+      $userBy = "1";
+      $stmt->bindParam(":user_id",$user_id);
+      $stmt->bindParam(":user_password", $user_password);
+      $stmt->bindParam(":temp_password", $temp_password);
+      $stmt->bindParam(":modified_by",$userBy);
+      $res = $stmt->execute();
+      if($res == 'true'){
+        $status = array(
+          "status" => ERR_OK,
+          "message" => "Updated Successfully");
+        return $status;
+      }else{
+        $status = array(
+          "status" => ERR_NOT_MODIFIED,
+          "message" => "Not Updated Successfully");
+        return $status;
+      }
+    } catch(PDOException $e) {
+      $status = array(
+              'status' => "500",
+              'message' => $e->getMessage()
+          );
+      return $status;
+    } 
+  }
+
+
+
 }

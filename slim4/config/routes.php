@@ -7,10 +7,11 @@ return function (App $app) {
   //$app->get('/', \App\Action\HomeAction::class);
   $app->get('/', \App\Action\Banners\GetBanners::class);
   //Admin roles and privileges
-  $app->get('/adminroles', \App\Action\GetAdminRoles::class);
-  $app->get('/getadminrole/{roleId}', \App\Action\GetAdminRole::class);
+  $app->get('/roles/getroles', \App\Action\Roles\GetRoles::class);
+  $app->post('/roles/addrole', \App\Action\Roles\AddRole::class);
+  $app->get('/roles/getrole/{roleId}', \App\Action\Roles\GetRole::class);
   $app->post('/addadminrole', \App\Action\AddAdminRole::class);
-  $app->post('/editadminrole', \App\Action\UpdateAdminRole::class);
+  $app->post('/roles/updaterole', \App\Action\Roles\UpdateRole::class);
   $app->delete('/deleteadminrole/{roleId}', \App\Action\DeleteAdminRole::class);
   $app->get('/getprivileges/{roleId}', \App\Action\GetPrivileges::class);
   $app->post('/editprivileges', \App\Action\EditPrivileges::class);
@@ -21,9 +22,9 @@ return function (App $app) {
 	//$app->post('/users/adduser',\App\Action\AddUser::class);
   $app->post('/users/adduser', \App\Action\Users\AddUser::class);
 	$app->get('/users/getuser/{userId}', \App\Action\Users\GetUser::class);
-	$app->get('/users/getusers',\App\Action\GetUsers::class);
+	$app->get('/users/getusers',\App\Action\Users\GetUsers::class);
 	$app->post('/users/updateuser',\App\Action\Users\UpdateUser::class);
-	$app->post('/users/updateuserpassword',\App\Action\UpdateUserPassword::class);
+	$app->post('/users/updateuserpassword',\App\Action\Users\UpdateUserPassword::class);
 	$app->post('/users/forgotpassword',\App\Action\ForgotPassword::class);
 	$app->delete('/users/deleteuser/{userId}',\App\Action\DeleteUser::class);
   $app->post('/users/updateuserstatus', \App\Action\UpdateUserStatus::class);

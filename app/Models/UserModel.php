@@ -43,6 +43,14 @@ class UserModel extends Model{
         $url = baseURL1.'/users/adduser';
         return $home->CallAPI('POST',$url,$data);
        
+    }
+    public function changepwd($data){
+
+         $home = new home();   
+         //print_r($data);echo "in codeigniter usermodel";exit;    
+        $url = baseURL1.'/users/updateuserpassword';
+        return $home->CallAPI('POST',$url,$data);
+       
     } 
 
     public function edituser($data){
@@ -68,5 +76,12 @@ class UserModel extends Model{
         $url = baseURL1.'/users/checklogin';
 
        return $home->CallAPI('POST',$url,$data);
+    }
+
+    public function getusers(){
+        $home = new home();  
+        $data = array();     
+        $url = baseURL1.'/users/getusers';
+        return $home->CallAPI('GET',$url,$data);
     }
 }

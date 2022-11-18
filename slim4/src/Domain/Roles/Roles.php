@@ -33,6 +33,16 @@ final class Roles
     $Roles = (array) $this->repository->getRole($data);
     return $Roles;
   }
+  public function getRolePriviliges($data): array 
+  {
+    $Roles = (array) $this->repository->getRolePriviliges($data);
+    return $Roles;
+  }
+  public function getModules(): array 
+  {
+    $Roles = (array) $this->repository->getModules();
+    return $Roles;
+  }
   public function deleteRole($data) :array 
   {
     $Role = $this->repository->deleteRole($data);
@@ -94,6 +104,22 @@ final class Roles
       }*/
       //$data['Role_avatar'] = $Role_avatar;
       $res = $this->repository->updateRole($data);
+      return $res;
+    } catch(PDOException $e) {
+      $status = array(
+              'status' => "500",
+              'message' => $e->getMessage()
+          );
+      return $status;
+    } 
+  }
+
+  public function updatePrivilies($data) : array 
+  {
+    try {
+      //print_r($data);echo "in Roleco";exit;
+      extract($data);
+      $res = $this->repository->updatePrivilies($data);
       return $res;
     } catch(PDOException $e) {
       $status = array(

@@ -73,6 +73,8 @@ $routes->post('storerole', 'RoleController::storerole');
 $routes->get('/getrole/(:any)', 'RoleController::getrole/$1');
 $routes->post('editrolestore', 'RoleController::editrolestore');
 $routes->get('/getroles', 'RoleController::index');
+$routes->get('/roleprivilies/(:any)', 'RoleController::roleprivilies/$1');
+$routes->post('/rolepriviliesstore', 'RoleController::rolepriviliesstore');
 
 
 

@@ -13,9 +13,11 @@ return function (App $app) {
   $app->post('/addadminrole', \App\Action\AddAdminRole::class);
   $app->post('/roles/updaterole', \App\Action\Roles\UpdateRole::class);
   $app->delete('/deleteadminrole/{roleId}', \App\Action\DeleteAdminRole::class);
-  $app->get('/getprivileges/{roleId}', \App\Action\GetPrivileges::class);
+  $app->get('/roles/getrolepriviliges/{roleId}', \App\Action\Roles\GetRolePrivileges::class);
+  $app->get('/roles/getmodules', \App\Action\Roles\GetModules::class);
   $app->post('/editprivileges', \App\Action\EditPrivileges::class);
   $app->post('/updaterolestatus', \App\Action\UpdateRoleStatus::class);
+  $app->post('/roles/updateprivilies', \App\Action\Roles\UpdatePrivilies::class);
 
   //Admin Users 
   $app->post('/users/checklogin',\App\Action\CheckLogin::class);

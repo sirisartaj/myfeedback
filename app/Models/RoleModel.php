@@ -37,6 +37,14 @@ class RoleModel extends Model{
         $url = baseURL1.'/roles/updaterole';
         return $home->CallAPI('POST',$url,$data);
        
+    }
+
+    public function updateprivilies($data){
+        //print_r($data);
+        $home = new home();       
+       $url = baseURL1.'/roles/updateprivilies'; //exit;
+        return $home->CallAPI('POST',$url,$data);
+       
     } 
     public function getrole($role_id){
 
@@ -51,6 +59,20 @@ class RoleModel extends Model{
         $home = new home();  
         $data = array();     
         $url = baseURL1.'/roles/getroles';//exit;
+        return $home->CallAPI('GET',$url,$data);
+    }
+
+    public function getrolepriviliges($role_id){
+        $home = new home();  
+        $data = array();     
+        $url = baseURL1.'/roles/getrolepriviliges/'.$role_id;//exit;
+        return $home->CallAPI('GET',$url,$data);
+    }
+
+    public function getmodules(){
+        $home = new home();  
+        $data = array();     
+        $url = baseURL1.'/roles/getmodules';//exit;
         return $home->CallAPI('GET',$url,$data);
     }
 }

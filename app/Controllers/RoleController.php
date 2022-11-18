@@ -111,5 +111,45 @@ class RoleController extends Controller
         echo view('roles/editrole',$data);
     }
 
+     function roleprivilies($role_id=''){
+        $RoleModel = new RoleModel();
+        helper(['form']);
+        $rules = [ ];
+        
+        $modules = $RoleModel->getmodules();
+        //print_r($modules);exit;
+        if($modules->status =200){
+            $data['modules'] = json_decode(json_encode($modules), true)['Role'];
+        }
+        
+        $data['previliges']['access_priviliges'] = array();
+        $previliges = $RoleModel->getrolepriviliges($role_id);
+        //print_r($previliges);exit;
+        if($previliges->status =200){
+            $data['previliges'] = json_decode(json_encode($previliges), true)['Role'];
+        }
+        //print_r($data['previliges']);exit;
+        //echo $data['role']['role_fname'];exit;
+        $data['role_id'] = $role_id;
+        $data['Headding']="Edit role";
+        if($this->validate($rules)){}else{
+            $data['validation'] = $this->validator;
+        }
+        echo view('roles/priviliges_list',$data);
+    }
+
+    function rolepriviliesstore(){
+         $RoleModel = new RoleModel();
+         $data['role_id'] = $this->request->getVar('role_id');
+         $data['module_id'] = $this->request->getVar('module_id');
+         $data['status'] = $this->request->getVar('status');
+         $data['col_name'] = $this->request->getVar('previliges').'_priviliges';
+         $modules = $RoleModel->updateprivilies($data);
+        return json_encode($modules);exit;
+        //return redirect()->to('/getroles');
+    }
+
+    
+
     
 }

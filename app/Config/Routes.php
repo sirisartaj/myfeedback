@@ -60,7 +60,7 @@ $routes->post('feebackreport', 'feedbackController::feebackreport');
 
 
 $routes->get('/adduser', 'ProfileController::adduser');
-$routes->get('/getuser/(:any)', 'ProfileController::getuser/$1');
+$routes->get('/getuser/(:any)', 'ProfileController::getuser/$1');//for edit user
 $routes->get('/changepassword/(:any)', 'ProfileController::changepassword/$1');
 $routes->get('/getusers', 'ProfileController::getusers');
 $routes->post('storeuser', 'ProfileController::storeuser');
